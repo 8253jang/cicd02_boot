@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
     @GetMapping("/")
     public String index(){
-        return ".github>workflows/deploy.yml CI/CD TEST중입니다.";
+        return ".github>workflows/deploy.yml CI/CD TEST 완료 다시 수정 해서 push하기.";
     }
 }
