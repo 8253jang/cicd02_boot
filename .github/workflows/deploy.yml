@@ -27,4 +27,4 @@ jobs:
             # jar 파일을 실행시키는 명령어이다. 그리고 발생하는 로그들을 ./output.log 파일에 남기는 명령어이다.
             # nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
             cd build/libs
-            nohup java -jar *SNAPSHOT.jar &
+            nohup java -jar *SNAPSHOT.jar > ./output.log 2>&1 &
