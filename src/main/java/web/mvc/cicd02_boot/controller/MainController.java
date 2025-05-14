@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
     @GetMapping("/")
     public String index(){
-        return "Docker 기반의 GitHub Actions를 이용한 CI/CD";
+        return "Docker 기반의 GitHub Actions를 이용한 CI/CD 수정완료!!!";
     }
 }
