@@ -18,6 +18,10 @@ jobs:
       - name: Create application.properties
         run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
 
+      # 2. application.properties 생성
+      - name: Create docker-compose.yml 생성
+        run: echo "${{ secrets.DOCKER_COMPOSE  }}" > ./docker-compose.yml
+
       # 3. gradlew에 실행 권한 부여
       - name: Gradlew 실행 권한 부여
         run: chmod +x ./gradlew
@@ -63,8 +67,8 @@ jobs:
             mkdir -p ~/cicd-docker
 
             # .env 파일 생성
-            echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ~/cicd-docker/.env
-            echo "secrets.EC2_USERNAME=${{ secrets.EC2_USERNAME }}" >> ~/cicd-docker/.env
+            # echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ~/cicd-docker/.env
+            # echo "secrets.EC2_USERNAME=${{ secrets.EC2_USERNAME }}" >> ~/cicd-docker/.env
             
             cd ~/cicd-docker
             docker-compose down || true
