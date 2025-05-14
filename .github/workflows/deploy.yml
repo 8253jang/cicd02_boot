@@ -41,7 +41,7 @@ jobs:
       - name: Docker 이미지 푸시
         run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
 
-      #docker-compose.yml 파일을 EC2로 직접 복사
+      # 8. docker-compose.yml 파일을 EC2로 복사
       - name: docker-compose.yml 전송
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -51,7 +51,7 @@ jobs:
           source: "docker-compose.yml"
           target: "~/cicd-docker/"
 
-      # 8. EC2에 SSH 접속 후 docker-compose 실행
+      # 9. .env 파일 생성 및 docker-compose 실행
       - name: EC2에서 컨테이너 실행
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -60,11 +60,13 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
           script: |
-           # mkdir -p ~/cicd-docker
-            export DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+            mkdir -p ~/cicd-docker
 
+            # .env 파일 생성
+            echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ~/cicd-docker/.env
+            echo "secrets.EC2_USERNAME=${{ secrets.EC2_USERNAME }}" >> ~/cicd-docker/.env
+            
             cd ~/cicd-docker
             docker-compose down || true
             docker-compose pull
             docker-compose up -d
-
