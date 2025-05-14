@@ -51,8 +51,13 @@ jobs:
           script_stop: true
           script: |
             mkdir -p ~/cicd-docker
-            echo "${{ secrets.DOCKER_COMPOSE }}" > ~/cicd-docker/docker-compose.yml
+            # heredoc 방식으로 docker-compose.yml 생성
+            cat <<EOF > ~/cicd-docker/docker-compose.yml
+            ${{ secrets.DOCKER_COMPOSE }}
+            EOF
+  
             cd ~/cicd-docker
             docker-compose down
             docker-compose pull
             docker-compose up -d
+    
