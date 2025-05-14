@@ -8,6 +8,8 @@ class Cicd02BootApplicationTests {
 
     @Test
     void contextLoads() {
+        //System.out.println("test중입니다.");
+        throw new RuntimeException("Fail!");
     }
 
 }
