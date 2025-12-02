@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
     @GetMapping("/")
     public String index(){
-        return "GitHub Actions를 이용한 SCP로  EC2 CI/CD TEST";
+        return "Docker기반의 GitHub Actions를 이용한 SCP로  EC2 CI/CD TEST";
     }
 }
